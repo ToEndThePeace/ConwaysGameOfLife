@@ -8,10 +8,9 @@ import {
 
 const initialState = {
     main: null,
-    buffer: null,
     boardZoom: 1,
-    rows: 50,
-    cols: 30,
+    rows: 40,
+    cols: 25,
     isPlaying: false,
 };
 export const reducer = (state = initialState, action) => {
@@ -20,7 +19,6 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 main: action.payload,
-                buffer: action.payload,
             };
         case SET_BOARD_ZOOM:
             return {

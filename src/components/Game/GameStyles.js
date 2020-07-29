@@ -8,8 +8,8 @@ const cellSize = () => {
         window.innerWidth || 0
     );
     const vh = Math.max(
-        document.documentElement.clientHeight || 0,
-        window.innerHeight || 0
+        document.documentElement.clientHeight * .83 || 0,
+        window.innerHeight * .83 || 0
     );
     if (vw > vh) {
         return `width: ${vw / rows};`;
