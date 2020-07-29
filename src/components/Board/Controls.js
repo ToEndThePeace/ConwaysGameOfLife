@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { setBoardZoom, resetBoardZoom } from "../../store/actions";
 
 const Controls = (props) => {
-    const { scale, setZoom, resetZoom } = props;
+    const { scale, isPlaying, setZoom, resetZoom } = props;
 
     const sliderHandler = (e) => {
         const { value } = e.target;
@@ -25,11 +25,12 @@ const Controls = (props) => {
                     </option>
                 </select>
             </label>
-            <label>
+            <div>
                 <button>Prev</button>
-                <button>Play</button>
+                <button>{isPlaying ? "Pause" : "Play"}</button>
+                <button>Reset</button>
                 <button>Next</button>
-            </label>
+            </div>
             <label>
                 Zoom:{" "}
                 <input
@@ -48,6 +49,7 @@ const Controls = (props) => {
 export default connect(
     (state) => ({
         scale: state.game.boardZoom,
+        isPlaying: state.game.isPlaying,
     }),
     (dispatch) => ({
         setZoom: (scale) => dispatch(setBoardZoom(scale)),

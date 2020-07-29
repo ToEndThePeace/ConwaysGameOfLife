@@ -46,7 +46,8 @@ const GameStyles = styled.div`
         ${rowSize()}
         .Cell {
             flex-grow: 1;
-            border: 1px solid green;
+            /* border: 1px solid black; */
+            margin: -1px;
             ${cellSize()}
             &::before {
                 content: "";
@@ -54,7 +55,7 @@ const GameStyles = styled.div`
                 padding-top: 100%;
             }
             &.dead {
-                background: none;
+                background: black;
             }
             &.alive {
                 background: yellow;

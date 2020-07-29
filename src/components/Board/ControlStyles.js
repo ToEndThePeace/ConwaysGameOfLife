@@ -6,7 +6,7 @@ const ControlStyles = styled.div`
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    label {
+    label, div {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;

@@ -5,12 +5,18 @@ export const boardInit = (arr) => ({
 });
 
 export const SET_BOARD_ZOOM = "SET_BOARD_ZOOM";
+export const RESET_BOARD_ZOOM = "RESET_BOARD_ZOOM";
 export const setBoardZoom = (scale) => ({
     type: SET_BOARD_ZOOM,
     payload: scale / 100,
 });
-
 export const resetBoardZoom = () => ({
-    type: SET_BOARD_ZOOM,
-    payload: 1,
+    type: RESET_BOARD_ZOOM,
+});
+
+export const CLICK_CELL = "CLICK_CELL";
+export const clickCell = (x, y) => ({
+    type: CLICK_CELL,
+    col: x,
+    row: y
 });

@@ -7,7 +7,8 @@ const BoardStyles = styled.div`
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    max-height: 85vh;
+    max-height: 83vh;
+    background: #666;
     .Game {
         width: 100vmax;
     }
