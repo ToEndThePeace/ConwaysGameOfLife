@@ -11,6 +11,16 @@ const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
 
 sagaMiddleware.run(rootSaga);
 
-export const action = (type) => store.dispatch({ type });
+export const action = (type, payload = null) =>
+    store.dispatch({ type, payload });
+
+export const readState = (reducer = null) => {
+    const stateContainer = store.getState();
+    if (reducer) {
+        return stateContainer[reducer];
+    } else {
+        return stateContainer;
+    }
+};
 
 export default store;
