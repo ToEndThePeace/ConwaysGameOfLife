@@ -9,9 +9,6 @@ const BoardStyles = styled.div`
     overflow: hidden;
     max-height: 83vh;
     background: #666;
-    .Game {
-        width: 100vmax;
-    }
     .Controls {
         height: 7vh;
         position: fixed;

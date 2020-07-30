@@ -17,7 +17,7 @@ const Game = (props) => {
 
 export default connect(
     (state) => ({
-        main: state.game.main,
+        main: state.board,
         scale: state.game.boardZoom,
     }),
     {}

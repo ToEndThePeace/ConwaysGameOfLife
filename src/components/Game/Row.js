@@ -6,7 +6,7 @@ const Row = (props) => {
     return (
         <div className="Row">
             {data.map((cell, i) => {
-                return <Cell key={i} status={cell} coords={[i, y]} />;
+                return <Cell key={y * i + i} status={cell} coords={[i, y]} />;
             })}
         </div>
     );

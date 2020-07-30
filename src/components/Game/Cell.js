@@ -16,7 +16,9 @@ const Cell = (props) => {
     };
     return (
         <div
-            className={`Cell ${props.status === false ? "dead" : "alive"}`}
+            className={`Cell ${props.status === false ? "dead" : "alive"}${
+                clickable ? " clickable" : ""
+            }`}
             onClick={cellClickHandler}
         />
     );

@@ -1,10 +1,10 @@
 import React from "react";
 import ControlStyles from "./ControlStyles";
 import { connect } from "react-redux";
-import { setBoardZoom, resetBoardZoom } from "../../store/actions";
+import { setBoardZoom, resetBoardZoom, togglePause } from "../../store/actions";
 
 const Controls = (props) => {
-    const { scale, isPlaying, setZoom, resetZoom } = props;
+    const { scale, isPlaying, setZoom, resetZoom, pauseButton } = props;
 
     const sliderHandler = (e) => {
         const { value } = e.target;
@@ -27,7 +27,9 @@ const Controls = (props) => {
             </label>
             <div>
                 <button>Prev</button>
-                <button>{isPlaying ? "Pause" : "Play"}</button>
+                <button onClick={pauseButton}>
+                    {isPlaying ? "Pause" : "Play"}
+                </button>
                 <button>Reset</button>
                 <button>Next</button>
             </div>
@@ -54,5 +56,6 @@ export default connect(
     (dispatch) => ({
         setZoom: (scale) => dispatch(setBoardZoom(scale)),
         resetZoom: () => dispatch(resetBoardZoom()),
+        pauseButton: () => dispatch(togglePause()),
     })
 )(Controls);

@@ -1,6 +1,12 @@
-export const BOARD_INIT = "BOARD_INIT";
-export const boardInit = (arr) => ({
-    type: BOARD_INIT,
+export const UPDATE_BOARD = "UPDATE_BOARD";
+export const updateBoard = (arr) => ({
+    type: UPDATE_BOARD,
+    payload: arr,
+});
+
+export const UPDATE_BUFFER = "UPDATE_BUFFER";
+export const updateBuffer = (arr) => ({
+    type: UPDATE_BUFFER,
     payload: arr,
 });
 
@@ -14,9 +20,14 @@ export const resetBoardZoom = () => ({
     type: RESET_BOARD_ZOOM,
 });
 
+export const TOGGLE_PAUSE = "TOGGLE_PAUSE";
+export const togglePause = () => ({
+    type: TOGGLE_PAUSE,
+});
+
 export const CLICK_CELL = "CLICK_CELL";
 export const clickCell = (x, y) => ({
     type: CLICK_CELL,
     col: x,
-    row: y
+    row: y,
 });
