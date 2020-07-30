@@ -28,8 +28,9 @@ export const resetBoardZoom = () => ({
 });
 
 export const TOGGLE_PAUSE = "TOGGLE_PAUSE";
-export const togglePause = () => ({
+export const togglePause = (timerId) => ({
     type: TOGGLE_PAUSE,
+    payload: timerId,
 });
 
 export const CLICK_CELL = "CLICK_CELL";

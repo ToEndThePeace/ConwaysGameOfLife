@@ -4,22 +4,35 @@ import { connect } from "react-redux";
 import {
     setBoardZoom,
     resetBoardZoom,
-    togglePause,
     resetBoardState,
     nextGen,
+    togglePause,
 } from "../../store/actions";
 
 const Controls = ({
     scale,
     isPlaying,
+    genCount,
+    timerId,
     setZoom,
     resetZoom,
     resetBoard,
     generateNext,
+    pauseButton,
 }) => {
     const sliderHandler = (e) => {
         const { value } = e.target;
         setZoom(value);
+    };
+    const pauseToggleHandler = (e) => {
+        if (isPlaying) {
+            // set an interval
+            clearInterval(timerId);
+            pauseButton();
+        } else {
+            let interval = setInterval(generateNext, 200);
+            pauseButton(interval);
+        }
     };
 
     return (
@@ -33,7 +46,9 @@ const Controls = ({
                 </select>
             </label> */}
             <div>
-                <button>{isPlaying ? "Pause" : "Play"}</button>
+                <button onClick={pauseToggleHandler}>
+                    {isPlaying ? "Pause" : "Play"}
+                </button>
                 <button onClick={resetBoard}>Reset</button>
                 <button onClick={generateNext}>Next</button>
             </div>
@@ -48,6 +63,7 @@ const Controls = ({
                 />
                 <button onClick={resetZoom}>Reset Zoom</button>
             </label>
+            <div>Generation: {genCount}</div>
         </ControlStyles>
     );
 };
@@ -56,11 +72,14 @@ export default connect(
     (state) => ({
         scale: state.game.boardZoom,
         isPlaying: state.game.isPlaying,
+        genCount: state.genCount,
+        timerId: state.game.timerId,
     }),
     (dispatch) => ({
         setZoom: (scale) => dispatch(setBoardZoom(scale)),
         resetZoom: () => dispatch(resetBoardZoom()),
         resetBoard: () => dispatch(resetBoardState()),
         generateNext: () => dispatch(nextGen()),
+        pauseButton: (timerId = null) => dispatch(togglePause(timerId)),
     })
 )(Controls);

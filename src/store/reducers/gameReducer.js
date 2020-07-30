@@ -10,6 +10,7 @@ const initialState = {
     rows: 25,
     cols: 25,
     isPlaying: false,
+    timerId: null,
     buffer: null,
 };
 export const reducer = (state = initialState, action) => {
@@ -28,6 +29,7 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPlaying: !state.isPlaying,
+                timerId: action.payload,
             };
         case UPDATE_BUFFER:
             return {
