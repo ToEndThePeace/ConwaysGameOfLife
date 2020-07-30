@@ -1,17 +1,20 @@
 export const UPDATE_BOARD = "UPDATE_BOARD";
 export const RESET_BOARD_STATE = "RESET_BOARD_STATE";
+export const UPDATE_BUFFER = "UPDATE_BUFFER";
+export const NEXT_GEN = "NEXT_GEN";
 export const updateBoard = (arr) => ({
     type: UPDATE_BOARD,
     payload: arr,
 });
 export const resetBoardState = () => ({
-    type: RESET_BOARD_STATE
-})
-
-export const UPDATE_BUFFER = "UPDATE_BUFFER";
+    type: RESET_BOARD_STATE,
+});
 export const updateBuffer = (arr) => ({
     type: UPDATE_BUFFER,
     payload: arr,
+});
+export const nextGen = () => ({
+    type: NEXT_GEN,
 });
 
 export const SET_BOARD_ZOOM = "SET_BOARD_ZOOM";

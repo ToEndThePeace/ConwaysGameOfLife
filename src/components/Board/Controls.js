@@ -6,25 +6,21 @@ import {
     resetBoardZoom,
     togglePause,
     resetBoardState,
+    nextGen,
 } from "../../store/actions";
 
-const Controls = (props) => {
-    const {
-        scale,
-        isPlaying,
-        setZoom,
-        resetZoom,
-        pauseButton,
-        resetBoard,
-    } = props;
-
+const Controls = ({
+    scale,
+    isPlaying,
+    setZoom,
+    resetZoom,
+    pauseButton,
+    resetBoard,
+    generateNext,
+}) => {
     const sliderHandler = (e) => {
         const { value } = e.target;
         setZoom(value);
-    };
-    const resetZoomHandler = (e) => {
-        e.preventDefault();
-        resetZoom();
     };
 
     return (
@@ -38,12 +34,11 @@ const Controls = (props) => {
                 </select>
             </label>
             <div>
-                <button>Prev</button>
                 <button onClick={pauseButton}>
                     {isPlaying ? "Pause" : "Play"}
                 </button>
                 <button onClick={resetBoard}>Reset</button>
-                <button>Next</button>
+                <button onClick={generateNext}>Next</button>
             </div>
             <label>
                 Zoom:{" "}
@@ -54,7 +49,7 @@ const Controls = (props) => {
                     min="0"
                     max="200"
                 />
-                <button onClick={resetZoomHandler}>Reset Zoom</button>
+                <button onClick={resetZoom}>Reset Zoom</button>
             </label>
         </ControlStyles>
     );
@@ -70,5 +65,6 @@ export default connect(
         resetZoom: () => dispatch(resetBoardZoom()),
         pauseButton: () => dispatch(togglePause()),
         resetBoard: () => dispatch(resetBoardState()),
+        generateNext: () => dispatch(nextGen()),
     })
 )(Controls);

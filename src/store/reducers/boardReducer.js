@@ -6,14 +6,6 @@ export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_BOARD:
             return action.payload;
-        // case CLICK_CELL:
-        //     return update(state, {
-        //         [action.row]: {
-        //             [action.col]: {
-        //                 $apply: (cell) => !cell,
-        //             },
-        //         },
-        //     });
         case CLICK_CELL:
             return [
                 ...state.slice(0, action.row),
