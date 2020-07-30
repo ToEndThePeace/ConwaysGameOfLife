@@ -18,17 +18,12 @@ export default function calculateBuffer(board) {
         count += board[bot][x] ? 1 : 0;
         count += board[bot][right] ? 1 : 0;
 
-        if (x < 2 && y < 2) {
-            console.log(board)
-            console.log({ x, y, count });
-        }
-
-        if (board[x][y]) {
+        if (board[y][x]) {
             // code for if current cell is alive
-            if (count === 2 || count === 3) {
-                return true;
-            } else {
+            if (count < 2 || count > 3) {
                 return false;
+            } else {
+                return true;
             }
         } else {
             // code if current cell is dead
@@ -43,10 +38,10 @@ export default function calculateBuffer(board) {
     for (var i = 0; i < board.length; i++) {
         buffer.push([]);
         for (var j = 0; j < board[0].length; j++) {
-            buffer[i].push(checkNeighbors(i, j));
+            buffer[i].push(checkNeighbors(j, i));
         }
     }
-    // console.log(buffer)
+    console.log(buffer)
 
     return buffer;
 }

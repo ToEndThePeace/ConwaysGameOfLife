@@ -14,7 +14,6 @@ const Controls = ({
     isPlaying,
     setZoom,
     resetZoom,
-    pauseButton,
     resetBoard,
     generateNext,
 }) => {
@@ -34,9 +33,7 @@ const Controls = ({
                 </select>
             </label> */}
             <div>
-                <button onClick={pauseButton}>
-                    {isPlaying ? "Pause" : "Play"}
-                </button>
+                <button>{isPlaying ? "Pause" : "Play"}</button>
                 <button onClick={resetBoard}>Reset</button>
                 <button onClick={generateNext}>Next</button>
             </div>
@@ -63,7 +60,6 @@ export default connect(
     (dispatch) => ({
         setZoom: (scale) => dispatch(setBoardZoom(scale)),
         resetZoom: () => dispatch(resetBoardZoom()),
-        pauseButton: () => dispatch(togglePause()),
         resetBoard: () => dispatch(resetBoardState()),
         generateNext: () => dispatch(nextGen()),
     })
