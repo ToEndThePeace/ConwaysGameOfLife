@@ -1,5 +1,10 @@
 import { put, select, takeEvery } from "redux-saga/effects";
-import { updateBoard, updateBuffer, UPDATE_BOARD } from "../actions";
+import {
+    updateBoard,
+    updateBuffer,
+    UPDATE_BOARD,
+    RESET_BOARD_STATE,
+} from "../actions";
 
 export function* makeBoard() {
     const {
@@ -22,6 +27,10 @@ export function* init() {
 
 export function* boardWatcher() {
     yield takeEvery(UPDATE_BOARD, updateBuffer);
+}
+
+export function* boardClear() {
+    yield takeEvery(RESET_BOARD_STATE, init);
 }
 
 // export function* nextGeneration() {

@@ -1,8 +1,12 @@
 export const UPDATE_BOARD = "UPDATE_BOARD";
+export const RESET_BOARD_STATE = "RESET_BOARD_STATE";
 export const updateBoard = (arr) => ({
     type: UPDATE_BOARD,
     payload: arr,
 });
+export const resetBoardState = () => ({
+    type: RESET_BOARD_STATE
+})
 
 export const UPDATE_BUFFER = "UPDATE_BUFFER";
 export const updateBuffer = (arr) => ({
