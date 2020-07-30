@@ -9,15 +9,16 @@ const Game = (props) => {
     return (
         <GameStyles className="Game" scale={scale}>
             {main.map((row, i) => {
-                return <Row key={i} data={row} />;
+                return <Row key={i} y={i} data={row} />;
             })}
         </GameStyles>
     );
 };
 
-export default connect((state) => {
-    return {
-        main: state.game.main,
+export default connect(
+    (state) => ({
+        main: state.board,
         scale: state.game.boardZoom,
-    };
-}, {})(Game);
+    }),
+    {}
+)(Game);
