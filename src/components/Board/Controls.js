@@ -25,14 +25,14 @@ const Controls = ({
 
     return (
         <ControlStyles className="Controls">
-            <label>
+            {/* <label>
                 Load Preset:
                 <select defaultValue="">
                     <option value="" disabled hidden>
                         Choose Preset
                     </option>
                 </select>
-            </label>
+            </label> */}
             <div>
                 <button onClick={pauseButton}>
                     {isPlaying ? "Pause" : "Play"}

@@ -51,7 +51,7 @@ export function* boardClear() {
 }
 
 export function* nextGeneration(buffer) {
-    yield put(updateBuffer(buffer));
+    yield put(updateBoard(buffer));
 }
 
 export function* iterator() {
