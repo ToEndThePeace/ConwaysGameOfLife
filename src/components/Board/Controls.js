@@ -58,81 +58,85 @@ const Controls = ({
 
     return (
         <ControlStyles className="Controls">
-            <label>
-                <button
-                    onClick={randomizeBoard}
-                    disabled={isPlaying ? true : false}
-                >
-                    Randomize
-                </button>
-            </label>
-            <div>Generation:&nbsp;{genCount}</div>
-            <label>
-                <select
-                    defaultValue=""
-                    disabled={isPlaying ? true : false}
-                    onChange={presetHandler}
-                >
-                    <option value="" disabled hidden>
-                        Choose Preset
-                    </option>
-                    {presetKeys.map((key, i) => {
-                        return (
-                            <option key={i} value={key}>
-                                {key}
-                            </option>
-                        );
-                    })}
-                </select>
-            </label>
-            <label>
-                Zoom:&nbsp;
-                <input
-                    type="range"
-                    value={scale * 100}
-                    onChange={zoomHandler}
-                    min="0"
-                    max="200"
-                />
-                &nbsp;
-                <button onClick={resetZoom}>Fit</button>
-            </label>
-            <div>
-                <button onClick={pauseToggleHandler}>
-                    {isPlaying ? "Pause" : "Play"}
-                </button>
-                <button
-                    onClick={resetBoard}
-                    disabled={isPlaying ? true : false}
-                >
-                    Reset
-                </button>
-                <button
-                    onClick={generateNext}
-                    disabled={isPlaying ? true : false}
-                >
-                    Next
-                </button>
+            <div className="container">
+                <label>
+                    <button
+                        onClick={randomizeBoard}
+                        disabled={isPlaying ? true : false}
+                    >
+                        Randomize
+                    </button>
+                </label>
+                <div>
+                    <button onClick={pauseToggleHandler}>
+                        {isPlaying ? "Pause" : "Play"}
+                    </button>
+                    <button
+                        onClick={resetBoard}
+                        disabled={isPlaying ? true : false}
+                    >
+                        Reset
+                    </button>
+                    <button
+                        onClick={generateNext}
+                        disabled={isPlaying ? true : false}
+                    >
+                        Next
+                    </button>
+                </div>
+                <label>
+                    <select
+                        defaultValue=""
+                        disabled={isPlaying ? true : false}
+                        onChange={presetHandler}
+                    >
+                        <option value="" disabled hidden>
+                            Choose Preset
+                        </option>
+                        {presetKeys.map((key, i) => {
+                            return (
+                                <option key={i} value={key}>
+                                    {key}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </label>
             </div>
-            <label>
-                Speed:&nbsp;
-                <input
-                    type="range"
-                    value={speed}
-                    min="0"
-                    max="400"
-                    onChange={speedHandler}
-                    style={{ direction: "rtl" }}
-                    disabled={isPlaying ? true : false}
-                />
-                &nbsp;
-                <button
-                    onClick={resetSpeed}
-                    disabled={isPlaying ? true : false}
-                >
-                    Reset
-                </button>
-            </label>
+            <div className="container">
+                <label>
+                    Zoom:&nbsp;
+                    <input
+                        type="range"
+                        value={scale * 100}
+                        onChange={zoomHandler}
+                        min="0"
+                        max="200"
+                    />
+                    &nbsp;
+                    <button onClick={resetZoom}>Fit</button>
+                </label>
+                <div>Generation:&nbsp;{genCount}</div>
+                <label>
+                    Speed:&nbsp;
+                    <input
+                        type="range"
+                        value={speed}
+                        min="0"
+                        max="400"
+                        onChange={speedHandler}
+                        style={{ direction: "rtl" }}
+                        disabled={isPlaying ? true : false}
+                    />
+                    &nbsp;
+                    <button
+                        onClick={resetSpeed}
+                        disabled={isPlaying ? true : false}
+                    >
+                        Reset
+                    </button>
+                </label>
+            </div>
         </ControlStyles>
     );
 };

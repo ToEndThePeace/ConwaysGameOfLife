@@ -12,6 +12,9 @@ const HeaderStyles = styled.header`
         font-size: 1.8rem;
         margin-bottom: 1vh;
         font-weight: 700;
+        @media screen and (max-width: 400px) {
+            font-size: 1.4rem;
+        }
     }
     nav {
         a {
