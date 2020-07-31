@@ -6,6 +6,7 @@ import {
     RESET_BOARD_STATE,
     RANDOMIZE,
     LOAD_PRESET,
+    resetGen,
 } from "../actions";
 import calculateBuffer from "../../bin/bufferCalculator";
 import { readState } from "..";
@@ -65,6 +66,7 @@ export function* watchRandomizer() {
         yield take(RANDOMIZE);
         const board = yield call(makeBoard, true);
         yield put(updateBoard(board));
+        yield put(resetGen());
     }
 }
 
@@ -87,5 +89,6 @@ export function* presetWatcher() {
     while (true) {
         const { payload } = yield take(LOAD_PRESET);
         yield put(updateBoard(presets[payload]));
+        yield put(resetGen());
     }
 }

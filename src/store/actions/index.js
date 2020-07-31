@@ -21,6 +21,11 @@ export const randomize = () => ({
     type: RANDOMIZE,
 });
 
+export const RESET_GEN = "RESET_GEN";
+export const resetGen = () => ({
+    type: RESET_GEN,
+});
+
 export const SET_BOARD_ZOOM = "SET_BOARD_ZOOM";
 export const RESET_BOARD_ZOOM = "RESET_BOARD_ZOOM";
 export const setBoardZoom = (scale) => ({
