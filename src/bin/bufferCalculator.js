@@ -41,7 +41,6 @@ export default function calculateBuffer(board) {
             buffer[i].push(checkNeighbors(j, i));
         }
     }
-    console.log(buffer)
 
     return buffer;
 }

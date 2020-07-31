@@ -4,8 +4,8 @@ import {
     init,
     boardWatcher,
     boardClear,
-    pauseWatcher,
     iterator,
+    watchRandomizer,
 } from "./gameSaga";
 
 export default function* rootSaga() {
@@ -13,7 +13,7 @@ export default function* rootSaga() {
         init(),
         boardWatcher(),
         boardClear(),
-        pauseWatcher(),
         iterator(),
+        watchRandomizer(),
     ]);
 }
