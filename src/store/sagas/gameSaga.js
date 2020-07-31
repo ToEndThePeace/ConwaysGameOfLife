@@ -4,36 +4,46 @@ import {
     updateBuffer,
     UPDATE_BOARD,
     RESET_BOARD_STATE,
-    TOGGLE_PAUSE,
+    RANDOMIZE,
 } from "../actions";
 import calculateBuffer from "../../bin/bufferCalculator";
 import { readState } from "..";
 
+const randomBool = () => {
+    return Math.random() < 0.7 ? false : true;
+};
+
 // THESE ARE WORKING FINE
-export function* makeBoard() {
+export function* makeBoard(randomize = false) {
     const {
         game: { rows, cols },
     } = yield select();
     const arr = [];
     for (let i = 0; i < cols; i++) {
-        arr.push(new Array(rows).fill(false));
+        // new Array(rows).fill(randomize ? randomBool() : false));
+        arr.push([]);
+        for (let j = 0; j < rows; j++) {
+            arr[i].push(randomize ? randomBool() : false);
+        }
     }
     return arr;
 }
 
-export function* init() {
-    const arr = yield makeBoard();
+export function* init(randomize = false) {
+    const arr = yield makeBoard(randomize);
     yield put(updateBoard(arr));
 }
 
 export function* boardClear() {
-    yield takeEvery(RESET_BOARD_STATE, init);
+    while (true) {
+        yield take(RESET_BOARD_STATE);
+        yield call(init, false);
+    }
 }
+
 export function* boardWatcher() {
     yield takeEvery(UPDATE_BOARD, bufferCreation);
 }
-
-// Something isn't being passed right in these
 
 export function* bufferCreation(action) {
     const { payload: currentBoard } = action;
@@ -45,9 +55,11 @@ export function* nextGeneration(buffer) {
     yield put(updateBoard(buffer));
 }
 
-export function* pauseWatcher() {
+export function* watchRandomizer() {
     while (true) {
-        yield take(TOGGLE_PAUSE);
+        yield take(RANDOMIZE);
+        const board = yield call(makeBoard, true);
+        yield put(updateBoard(board));
     }
 }
 

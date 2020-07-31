@@ -8,13 +8,13 @@ const cellSize = () => {
         window.innerWidth || 0
     );
     const vh = Math.max(
-        document.documentElement.clientHeight * 0.83 || 0,
-        window.innerHeight * 0.83 || 0
+        document.documentElement.clientHeight * 0.75 || 0,
+        window.innerHeight * 0.75 || 0
     );
     if (vw > vh) {
         return `width: ${vw / rows};`;
     } else {
-        return `width: ${(vh / rows) * 0.83};`;
+        return `width: ${(vh / rows) * 0.75};`;
     }
 };
 const rowSize = () => {
@@ -29,7 +29,7 @@ const rowSize = () => {
     if (vw > vh) {
         return `width: ${vw}vw;`;
     } else {
-        return `width: ${vh * 0.83}vh;`;
+        return `width: ${vh * 0.75}vh;`;
     }
 };
 const dimensions = (flag) => {
@@ -38,7 +38,7 @@ const dimensions = (flag) => {
         case "height":
             return (cols / rows) * 100;
         case "max-width":
-            return (rows / cols) * 100 * 0.83;
+            return (rows / cols) * 100 * 0.75;
         default:
             return 50;
     }
@@ -53,7 +53,7 @@ const GameStyles = styled.div`
     transform: scale(${(props) => props.scale}, ${(props) => props.scale});
     width: 100vw;
     height: ${dimensions("height")}vw;
-    max-height: 83vh;
+    max-height: 75vh;
     max-width: ${dimensions("max-width")}vh;
     .Row {
         display: flex;
@@ -61,7 +61,7 @@ const GameStyles = styled.div`
         ${rowSize()}
         .Cell {
             flex-grow: 1;
-            border: 1px solid #111;
+            border: 1px solid #281;
             overflow: hidden;
             ${cellSize()}
             &::before {
@@ -70,10 +70,10 @@ const GameStyles = styled.div`
                 padding-top: 100%;
             }
             &.dead {
-                background: black;
+                background: none;
             }
             &.alive {
-                background: yellow;
+                background: #fff;
             }
             &.clickable {
                 cursor: pointer;

@@ -7,10 +7,9 @@ const BoardStyles = styled.div`
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    max-height: 83vh;
-    background: #666;
+    max-height: 75vh;
     .Controls {
-        height: 7vh;
+        height: 15vh;
         position: fixed;
         bottom: 0;
         width: 100%;

@@ -2,6 +2,7 @@ export const UPDATE_BOARD = "UPDATE_BOARD";
 export const RESET_BOARD_STATE = "RESET_BOARD_STATE";
 export const UPDATE_BUFFER = "UPDATE_BUFFER";
 export const NEXT_GEN = "NEXT_GEN";
+export const RANDOMIZE = "RANDOMIZE";
 export const updateBoard = (arr) => ({
     type: UPDATE_BOARD,
     payload: arr,
@@ -15,6 +16,9 @@ export const updateBuffer = (arr) => ({
 });
 export const nextGen = () => ({
     type: NEXT_GEN,
+});
+export const randomize = () => ({
+    type: RANDOMIZE,
 });
 
 export const SET_BOARD_ZOOM = "SET_BOARD_ZOOM";

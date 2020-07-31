@@ -7,9 +7,8 @@ import {
     resetBoardState,
     nextGen,
     togglePause,
-    updateRows,
-    updateCols,
     changeSpeed,
+    randomize,
 } from "../../store/actions";
 
 const Controls = ({
@@ -17,17 +16,14 @@ const Controls = ({
     isPlaying,
     genCount,
     timerId,
-    cols,
-    rows,
     speed,
     setZoom,
     resetZoom,
     resetBoard,
     generateNext,
     pauseButton,
-    rowUpdate,
-    colUpdate,
     speedUpdate,
+    randomizeBoard,
 }) => {
     const pauseToggleHandler = (e) => {
         if (isPlaying) {
@@ -45,40 +41,41 @@ const Controls = ({
     };
     const speedHandler = (e) => {
         const { value } = e.target;
-        speedUpdate(value * 10);
+        speedUpdate(value);
+    };
+    const resetSpeed = (e) => {
+        speedUpdate(200);
     };
 
     return (
         <ControlStyles className="Controls">
-            {/* <label>
-                Load Preset:
-                <select defaultValue="">
-                    <option value="" disabled hidden>
-                        Choose Preset
-                    </option>
-                </select>
-            </label> */}
-            <label>
-                Speed:
-                <input
-                    type="range"
-                    value={speed / 10}
-                    min="0"
-                    max="40"
-                    onChange={speedHandler}
-                    style={{ direction: "rtl" }}
-                    disabled={isPlaying ? true : false}
-                />
-            </label>
             <div>
                 <button onClick={pauseToggleHandler}>
                     {isPlaying ? "Pause" : "Play"}
                 </button>
-                <button onClick={resetBoard}>Reset</button>
-                <button onClick={generateNext}>Next</button>
+                <button
+                    onClick={resetBoard}
+                    disabled={isPlaying ? true : false}
+                >
+                    Reset
+                </button>
+                <button
+                    onClick={generateNext}
+                    disabled={isPlaying ? true : false}
+                >
+                    Next
+                </button>
             </div>
+            <div>Generation:&nbsp;{genCount}</div>
             <label>
-                Zoom:{" "}
+                <select defaultValue="" disabled={isPlaying ? true : false}>
+                    <option value="" disabled hidden>
+                        Choose Preset
+                    </option>
+                </select>
+            </label>
+            <label>
+                Zoom:&nbsp;
                 <input
                     type="range"
                     value={scale * 100}
@@ -86,9 +83,36 @@ const Controls = ({
                     min="0"
                     max="200"
                 />
-                <button onClick={resetZoom}>Reset Zoom</button>
+                &nbsp;
+                <button onClick={resetZoom}>Fit</button>
             </label>
-            <div>Generation: {genCount}</div>
+            <label>
+                <button
+                    onClick={randomizeBoard}
+                    disabled={isPlaying ? true : false}
+                >
+                    Randomize
+                </button>
+            </label>
+            <label>
+                Speed:&nbsp;
+                <input
+                    type="range"
+                    value={speed}
+                    min="0"
+                    max="400"
+                    onChange={speedHandler}
+                    style={{ direction: "rtl" }}
+                    disabled={isPlaying ? true : false}
+                />
+                &nbsp;
+                <button
+                    onClick={resetSpeed}
+                    disabled={isPlaying ? true : false}
+                >
+                    Reset
+                </button>
+            </label>
         </ControlStyles>
     );
 };
@@ -99,8 +123,6 @@ export default connect(
         isPlaying: state.game.isPlaying,
         genCount: state.genCount,
         timerId: state.game.timerId,
-        cols: state.game.cols,
-        rows: state.game.rows,
         speed: state.game.simSpeed,
     }),
     (dispatch) => ({
@@ -109,8 +131,7 @@ export default connect(
         resetBoard: () => dispatch(resetBoardState()),
         generateNext: () => dispatch(nextGen()),
         pauseButton: (timerId = null) => dispatch(togglePause(timerId)),
-        rowUpdate: (rows) => dispatch(updateRows(rows)),
-        colUpdate: (cols) => dispatch(updateCols(cols)),
         speedUpdate: (speed) => dispatch(changeSpeed(speed)),
+        randomizeBoard: () => dispatch(randomize()),
     })
 )(Controls);
