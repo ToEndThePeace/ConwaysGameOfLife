@@ -6,6 +6,7 @@ import {
     boardClear,
     iterator,
     watchRandomizer,
+    presetWatcher,
 } from "./gameSaga";
 
 export default function* rootSaga() {
@@ -15,5 +16,6 @@ export default function* rootSaga() {
         boardClear(),
         iterator(),
         watchRandomizer(),
+        presetWatcher(),
     ]);
 }

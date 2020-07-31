@@ -5,9 +5,14 @@ import {
     UPDATE_BOARD,
     RESET_BOARD_STATE,
     RANDOMIZE,
+    LOAD_PRESET,
 } from "../actions";
 import calculateBuffer from "../../bin/bufferCalculator";
 import { readState } from "..";
+import presets from "../../bin/presets";
+
+// Preset data to be imported from controls
+export const presetKeys = Object.keys(presets);
 
 const randomBool = () => {
     return Math.random() < 0.7 ? false : true;
@@ -70,5 +75,17 @@ export function* iterator() {
         yield call(bufferCreation, { payload: board });
         const { buffer } = readState("game");
         yield call(nextGeneration, buffer);
+    }
+}
+
+export function* loadPreset(key) {
+    const board = presets[key];
+    yield put(updateBoard(board));
+}
+
+export function* presetWatcher() {
+    while (true) {
+        const { payload } = yield take(LOAD_PRESET);
+        yield put(updateBoard(presets[payload]));
     }
 }
