@@ -44,19 +44,15 @@ export const clickCell = (x, y) => ({
     row: y,
 });
 
-// Controls need to be put in separate reducer
-export const UPDATE_ROWS = "UPDATE_ROWS";
-export const UPDATE_COLS = "UPDATE_COLS";
+// Controls should be put in separate reducer
 export const CHANGE_SPEED = "CHANGE_SPEED";
-export const updateRows = (rows) => ({
-    type: UPDATE_ROWS,
-    payload: rows,
-});
-export const updateCols = (cols) => ({
-    type: UPDATE_COLS,
-    payload: cols,
-});
 export const changeSpeed = (speed) => ({
     type: CHANGE_SPEED,
     payload: speed,
+});
+
+export const LOAD_PRESET = "LOAD_PRESET";
+export const loadPreset = (key) => ({
+    type: LOAD_PRESET,
+    payload: key,
 });

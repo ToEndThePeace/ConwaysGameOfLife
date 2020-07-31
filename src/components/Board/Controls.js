@@ -1,6 +1,6 @@
 import React from "react";
-import ControlStyles from "./ControlStyles";
 import { connect } from "react-redux";
+import ControlStyles from "./ControlStyles";
 import {
     setBoardZoom,
     resetBoardZoom,
@@ -9,7 +9,10 @@ import {
     togglePause,
     changeSpeed,
     randomize,
+    loadPreset,
 } from "../../store/actions";
+
+import { presetKeys } from "../../store/sagas/gameSaga";
 
 const Controls = ({
     scale,
@@ -17,6 +20,7 @@ const Controls = ({
     genCount,
     timerId,
     speed,
+    preset,
     setZoom,
     resetZoom,
     resetBoard,
@@ -24,6 +28,7 @@ const Controls = ({
     pauseButton,
     speedUpdate,
     randomizeBoard,
+    updatePreset,
 }) => {
     const pauseToggleHandler = (e) => {
         if (isPlaying) {
@@ -46,9 +51,52 @@ const Controls = ({
     const resetSpeed = (e) => {
         speedUpdate(200);
     };
+    const presetHandler = (e) => {
+        const { value: newKey } = e.target;
+        updatePreset(newKey);
+    };
 
     return (
         <ControlStyles className="Controls">
+            <label>
+                <button
+                    onClick={randomizeBoard}
+                    disabled={isPlaying ? true : false}
+                >
+                    Randomize
+                </button>
+            </label>
+            <div>Generation:&nbsp;{genCount}</div>
+            <label>
+                <select
+                    defaultValue=""
+                    disabled={isPlaying ? true : false}
+                    onChange={presetHandler}
+                >
+                    <option value="" disabled hidden>
+                        Choose Preset
+                    </option>
+                    {presetKeys.map((key, i) => {
+                        return (
+                            <option key={i} value={key}>
+                                {key}
+                            </option>
+                        );
+                    })}
+                </select>
+            </label>
+            <label>
+                Zoom:&nbsp;
+                <input
+                    type="range"
+                    value={scale * 100}
+                    onChange={zoomHandler}
+                    min="0"
+                    max="200"
+                />
+                &nbsp;
+                <button onClick={resetZoom}>Fit</button>
+            </label>
             <div>
                 <button onClick={pauseToggleHandler}>
                     {isPlaying ? "Pause" : "Play"}
@@ -66,34 +114,6 @@ const Controls = ({
                     Next
                 </button>
             </div>
-            <div>Generation:&nbsp;{genCount}</div>
-            <label>
-                <select defaultValue="" disabled={isPlaying ? true : false}>
-                    <option value="" disabled hidden>
-                        Choose Preset
-                    </option>
-                </select>
-            </label>
-            <label>
-                Zoom:&nbsp;
-                <input
-                    type="range"
-                    value={scale * 100}
-                    onChange={zoomHandler}
-                    min="0"
-                    max="200"
-                />
-                &nbsp;
-                <button onClick={resetZoom}>Fit</button>
-            </label>
-            <label>
-                <button
-                    onClick={randomizeBoard}
-                    disabled={isPlaying ? true : false}
-                >
-                    Randomize
-                </button>
-            </label>
             <label>
                 Speed:&nbsp;
                 <input
@@ -124,6 +144,7 @@ export default connect(
         genCount: state.genCount,
         timerId: state.game.timerId,
         speed: state.game.simSpeed,
+        preset: state.game.preset,
     }),
     (dispatch) => ({
         setZoom: (scale) => dispatch(setBoardZoom(scale)),
@@ -133,5 +154,6 @@ export default connect(
         pauseButton: (timerId = null) => dispatch(togglePause(timerId)),
         speedUpdate: (speed) => dispatch(changeSpeed(speed)),
         randomizeBoard: () => dispatch(randomize()),
+        updatePreset: (key) => dispatch(loadPreset(key)),
     })
 )(Controls);

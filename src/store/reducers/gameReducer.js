@@ -3,9 +3,8 @@ import {
     RESET_BOARD_ZOOM,
     TOGGLE_PAUSE,
     UPDATE_BUFFER,
-    UPDATE_ROWS,
-    UPDATE_COLS,
     CHANGE_SPEED,
+    LOAD_PRESET,
 } from "../actions";
 
 const initialState = {
@@ -13,6 +12,7 @@ const initialState = {
     rows: 25,
     cols: 25,
     simSpeed: 200,
+    preset: "",
     isPlaying: false,
     timerId: null,
     buffer: null,
@@ -40,20 +40,15 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 buffer: action.payload,
             };
-        case UPDATE_ROWS:
-            return {
-                ...state,
-                rows: action.payload,
-            };
-        case UPDATE_COLS:
-            return {
-                ...state,
-                cols: action.payload,
-            };
         case CHANGE_SPEED:
             return {
                 ...state,
                 simSpeed: action.payload,
+            };
+        case LOAD_PRESET:
+            return {
+                ...state,
+                preset: action.payload,
             };
         default:
             return state;
