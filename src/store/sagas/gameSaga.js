@@ -7,6 +7,8 @@ import {
     RANDOMIZE,
     LOAD_PRESET,
     resetGen,
+    clearPreset,
+    CLICK_CELL,
 } from "../actions";
 import calculateBuffer from "../../bin/bufferCalculator";
 import { readState } from "..";
@@ -44,6 +46,7 @@ export function* boardClear() {
     while (true) {
         yield take(RESET_BOARD_STATE);
         yield call(init, false);
+        yield put(clearPreset());
     }
 }
 
@@ -67,6 +70,7 @@ export function* watchRandomizer() {
         const board = yield call(makeBoard, true);
         yield put(updateBoard(board));
         yield put(resetGen());
+        yield put(clearPreset());
     }
 }
 
@@ -89,6 +93,14 @@ export function* presetWatcher() {
     while (true) {
         const { payload } = yield take(LOAD_PRESET);
         yield put(updateBoard(presets[payload]));
+        yield put(resetGen());
+    }
+}
+
+export function* clickWatcher() {
+    while (true) {
+        yield take(CLICK_CELL);
+        yield put(clearPreset());
         yield put(resetGen());
     }
 }

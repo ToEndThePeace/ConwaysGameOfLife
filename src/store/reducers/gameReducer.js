@@ -5,6 +5,7 @@ import {
     UPDATE_BUFFER,
     CHANGE_SPEED,
     LOAD_PRESET,
+    CLEAR_PRESET,
 } from "../actions";
 
 const initialState = {
@@ -50,6 +51,11 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 preset: action.payload,
             };
+        case CLEAR_PRESET:
+            return {
+                ...state,
+                preset: ""
+            }
         default:
             return state;
     }
