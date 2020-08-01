@@ -86,6 +86,7 @@ const Controls = ({
                 </div>
                 <label>
                     <select
+                        defaultValue=""
                         value={preset}
                         disabled={isPlaying ? true : false}
                         onChange={presetHandler}
