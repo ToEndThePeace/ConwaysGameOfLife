@@ -61,3 +61,8 @@ export const loadPreset = (key) => ({
     type: LOAD_PRESET,
     payload: key,
 });
+
+export const CLEAR_PRESET = "CLEAR_PRESET";
+export const clearPreset = () => ({
+    type: CLEAR_PRESET,
+});

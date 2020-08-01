@@ -7,6 +7,7 @@ import {
     iterator,
     watchRandomizer,
     presetWatcher,
+    clickWatcher,
 } from "./gameSaga";
 
 export default function* rootSaga() {
@@ -17,5 +18,6 @@ export default function* rootSaga() {
         iterator(),
         watchRandomizer(),
         presetWatcher(),
+        clickWatcher(),
     ]);
 }
